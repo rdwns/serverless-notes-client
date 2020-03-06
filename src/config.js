@@ -1,4 +1,6 @@
 export default {
+  MAX_ATTACHMENT_SIZE: 5000000,
+  STRIPE_KEY: "pk_test_LZa7Ac7wns1nJq8iuF64Ju2J00sWVnEy4w",
     s3: {
       REGION: "us-east-2",
       BUCKET: "rdwn-note"
