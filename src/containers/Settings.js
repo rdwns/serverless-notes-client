@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { API } from "aws-amplify";
-import Settings from "./containers/Settings";
 import { Elements, StripeProvider } from "react-stripe-elements";
 import BillingForm from "../components/BillingForm";
 import config from "../config";
 import "./Settings.css";
-
 
 export default function Settings(props) {
   const [isLoading, setIsLoading] = useState(false);

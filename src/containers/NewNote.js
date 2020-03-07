@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
+import { API } from "aws-amplify";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
+import { s3Upload } from "../libs/awsLib";
 import config from "../config";
 import "./NewNote.css";
-import { API } from "aws-amplify";
-import { s3Upload } from "../libs/awsLib";
 
 export default function NewNote(props) {
   const file = useRef(null);

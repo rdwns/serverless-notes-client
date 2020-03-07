@@ -2,14 +2,16 @@ import React, { useRef, useState, useEffect } from "react";
 import { API, Storage } from "aws-amplify";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
+import { s3Upload } from "../libs/awsLib";
 import config from "../config";
 import "./Notes.css";
-import { s3Upload } from "../libs/awsLib";
 
 export default function Notes(props) {
   const file = useRef(null);
   const [note, setNote] = useState(null);
   const [content, setContent] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     function loadNote() {

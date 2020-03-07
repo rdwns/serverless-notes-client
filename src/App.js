@@ -1,19 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Auth } from "aws-amplify";
 import { Link, withRouter } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
-import "./App.css";
+import { LinkContainer } from "react-router-bootstrap";
 import Routes from "./Routes";
-
+import "./App.css";
 
 function App(props) {
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
+
+  useEffect(() => {
+    onLoad();
+  }, []);
+
+  async function onLoad() {
+    try {
+      await Auth.currentSession();
+      userHasAuthenticated(true);
+    }
+    catch(e) {
+      if (e !== 'No current user') {
+        alert(e);
+      }
+    }
+
+    setIsAuthenticating(false);
+  }
+
   async function handleLogout() {
     await Auth.signOut();
 
     userHasAuthenticated(false);
+
     props.history.push("/login");
   }
+
   return (
     !isAuthenticating && (
       <div className="App container">
